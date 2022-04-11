@@ -58,7 +58,7 @@ async function createTransaction(req:Request, res:Response) {
             createdAt: new Date().toISOString()
         }
         const dbPath = path.resolve(__filename, '../../../data/balance.json');
-        const newTransaction = Accounts.create(transaction);
+        const newTransaction = await Accounts.create(transaction);
         fs.writeFileSync(dbPath, JSON.stringify(accountData, null, ' '))
         res.writeHead(200, { "Content-Type": "application/json" })
         return res.end(JSON.stringify(newTransaction))
